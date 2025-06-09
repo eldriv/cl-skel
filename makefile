@@ -17,7 +17,7 @@ TARGET_DIR := $(HOME)/common-lisp
 all: project
 
 project:
-	@echo "====Common Lisp Project Generator===="
+	@echo "[Common Lisp Project Generator]"
 	@echo ""
 	@printf "📝 What is the name of the project?: "
 	@read PROJECT_NAME && \
