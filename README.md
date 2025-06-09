@@ -38,7 +38,7 @@ A fast and flexible tool to generate organized Common Lisp projects — with pro
 
 ## Usage
 
-### Basic Project Creation
+### Terminal
 
 To create a project in the default location (`~/common-lisp/`):
 
@@ -56,6 +56,18 @@ $ (cl-project-builder/src/main:create-project^cr8 "my-project" :target "/my/spec
 ;; or
 $ (cl-project-builder/src/main:cr8 "my-project" :target "/my/specified/path")
 ```
+### Makefile
+```make
+$ make help
+$ make setup
+$ make
+```
+
+### REPL (SBCL)
+```lisp
+CL-USER> (ql:quickload :cl-project-builder)
+CL-USER> (cl-project-builder/src/main:cr8 "my-project")
+#P"/home/eldriv/common-lisp/my-project"
 ---
 
 ### Generated Project Structure
