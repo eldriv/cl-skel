@@ -121,7 +121,7 @@ my-project/
    ```
 
 ## Customizing Your Projects
-Want to tweak the generated files? You can:
+To tweak the generated files? You can:
 - Add custom replacement functions in `specials.lisp` (modify `*table*`).
 - Create new file generators in the relevant modules.
 - Update the `create-files` function in `main.lisp` to include additional files.
