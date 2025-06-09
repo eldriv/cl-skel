@@ -1,9 +1,9 @@
-(uiop:define-package #:cl-project-builder/src/root
+(uiop:define-package #:cl-project-builder/src/templates/root
   (:use #:cl
         #:marie
         #:cl-project-builder/src/utilities))
 
-(in-package #:cl-project-builder/src/root)
+(in-package #:cl-project-builder/src/templates/root)
 
 (def create-src-version-file ()
   "Generate `/version.sexp'."

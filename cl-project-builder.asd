@@ -9,11 +9,11 @@
   :class :package-inferred-system
   :depends-on (#:uiop
                #:marie
-               #:cl-project-builder/src/specials
+               #:cl-project-builder/src/templates/specials
                #:cl-project-builder/src/utilities
-               #:cl-project-builder/src/root
-               #:cl-project-builder/src/system-definitions
-               #:cl-project-builder/src/src-files
-               #:cl-project-builder/src/test-files
+               #:cl-project-builder/src/templates/root
+               #:cl-project-builder/src/templates/system-definitions
+               #:cl-project-builder/src/templates/src-files
+               #:cl-project-builder/src/templates/test-files
                #:cl-project-builder/src/main)
   :in-order-to ((test-op (test-op "proj-test"))))

@@ -1,8 +1,8 @@
-(uiop:define-package #:cl-project-builder/src/specials
+(uiop:define-package #:cl-project-builder/src/templates/specials
   (:use #:cl
         #:marie))
 
-(in-package #:cl-project-builder/src/specials)
+(in-package #:cl-project-builder/src/templates/specials)
 
 ;;; Uitilities
 (def run-trim (command)

@@ -1,12 +1,12 @@
-(uiop:define-package #:cl-project-builder/src/system-definitions
+(uiop:define-package #:cl-project-builder/src/templates/system-definitions
   (:use #:cl
         #:marie
         #:cl-project-builder/src/utilities))
 
-(in-package #:cl-project-builder/src/system-definitions)
+(in-package #:cl-project-builder/src/templates/system-definitions)
 
 (deftemplate* src-asdf
-  "Generate `/my-project.asd'."
+    "Generate `/my-project.asd'."
   ";;;; ${project}.asd --- Top-level ASDF file for ${project}
 (defsystem #:${project}
     :description \"${project}\"
@@ -23,7 +23,7 @@
 ")
 
 (deftemplate* t-asdf
-  "Generate `/t-my-project.asd'."
+    "Generate `/t-my-project.asd'."
   ";;;; ${project}-tests.asd --- Test ASDF file for ${project}
 (defsystem #:${project}-tests
     :description \"\"

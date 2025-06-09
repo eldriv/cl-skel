@@ -1,7 +1,7 @@
 (uiop:define-package #:cl-project-builder/src/utilities
   (:use #:cl
         #:marie
-        #:cl-project-builder/src/specials))
+        #:cl-project-builder/src/templates/specials))
 
 (in-package #:cl-project-builder/src/utilities)
 
