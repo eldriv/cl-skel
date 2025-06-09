@@ -30,7 +30,9 @@
       (("main" "lisp") (create-src-main-file))
       (("driver" "lisp") (create-src-driver))
       (("user" "lisp") (create-src-user))
-      (("build" "lisp") (create-src-build)))
+      (("build" "lisp") (create-src-build))
+      (("utilities" "lisp") (create-src-utilities))
+      (("specials" "lisp") (create-src-specials)))
     ;; test files
     (with-out-files project-tests-dir
       (("main-tests" "lisp") (create-t-main-file))
