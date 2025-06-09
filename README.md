@@ -1,7 +1,5 @@
 # Common Lisp Project Builder
-
 A fast and flexible tool to generate organized Common Lisp projects — with proper ASDF definitions, testing framework integration, and a standardized directory layout.
----
 
 ## Features
 - **Automated Project Structure**  
