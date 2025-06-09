@@ -1,0 +1,41 @@
+(uiop:define-package #:cl-project-builder/src/system-definitions
+  (:use #:cl
+        #:marie
+        #:cl-project-builder/src/utilities))
+
+(in-package #:cl-project-builder/src/system-definitions)
+
+(def create-src-asdf ()
+  "Generate the main ASDF stub."
+  (format-with-replacements ";;;; ${project}.asd --- top-level ASDF file for ${project}
+(defsystem #:${project}
+    :description \"${project}\"
+    :version (:read-file-form #P\"version.sexp\")
+    :author \"${author} <${email}>\"
+    :maintainer \"${author} <${email}>\"
+    :license \"\"
+    :class :package-inferred-system
+    :depends-on (#:marie
+                 #:${project}/src/main
+                 #:${project}/src/driver
+                 #:${project}/src/user)
+    :in-order-to ((test-op (test-op \"${project}-tests\"))))
+"))
+(def create-t-asdf ()
+  "Generate the test ASDF stub."
+  (format-with-replacements  "${project}-tests.asd --- test ASDF file for ${project}
+(defsystem #:${project}-tests
+    :description \"\"
+    :version (:read-file-form #P\"version-tests.sexp\")
+    :author \"${author} <${email}>\"
+    :maintainer \"${author} <${email}>\"
+    :license \"\"
+    :class :package-inferred-system
+    :depends-on (#:fiveam
+                 #:marie
+                 #:${project}
+                 #:${project}/t/main-tests
+                 #:${project}/t/driver-tests
+                 #:${project}/t/user-tests)
+    :perform (test-op (o c) (uiop:symbol-call :${project}/t/main-tests :run-tests)))
+"))
