@@ -6,7 +6,7 @@
 (in-package #:cl-project-builder/src/system-definitions)
 
 (def create-src-asdf ()
-  "Generate the main ASDF stub."
+  "Generate the main ASDF file."
   (format-with-replacements ";;;; ${project}.asd --- top-level ASDF file for ${project}
 (defsystem #:${project}
     :description \"${project}\"
@@ -22,8 +22,8 @@
     :in-order-to ((test-op (test-op \"${project}-tests\"))))
 "))
 (def create-t-asdf ()
-  "Generate the test ASDF stub."
-  (format-with-replacements  "${project}-tests.asd --- test ASDF file for ${project}
+  "Generate the test ASDF file."
+  (format-with-replacements  ";;;; ${project}-tests.asd --- test ASDF file for ${project}
 (defsystem #:${project}-tests
     :description \"\"
     :version (:read-file-form #P\"version-tests.sexp\")

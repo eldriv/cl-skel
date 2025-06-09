@@ -1,122 +1,133 @@
-# Common Lisp Project Builder
-A fast and flexible tool to generate organized Common Lisp projects — with proper ASDF definitions, testing framework integration, and a standardized directory layout.
+# CL-Project-Builder: Create Common Lisp Projects with Ease
 
-## Features
-- **Automated Project Structure**  
-  Generates `src/` and `t/` directories with a clean layout.
-- **ASDF Integration**  
-  Creates both main and test system definitions.
-- **Git Integration**  
-  Detects Git username and email for project metadata.
-- **Template System**  
-  Flexible string-replacement system for customizing generated files.
-- **Package Management**  
-  Uses package-inferred systems for clean dependency management.
-- **Testing Ready**  
-  Sets up the [FiveAM](https://github.com/lispci/fiveam) testing framework and test runners.
-- **Build System**  
-  Includes Makefiles and build scripts for easy compilation.
----
+CL Project Builder is a tool to quickly set up organized Common Lisp projects with a clean structure, ASDF system definitions, and built-in testing. Whether you're starting a new project or prototyping, this tool streamlines the process so you can focus on coding.
 
-## Dependencies
+## What It Does
+- **Sets Up Project Structure**: Creates `src/` and `t/` directories for your code and tests.
+- **ASDF Support**: Generates system definitions for your project and tests.
+- **Git Integration**: Automatically pulls your Git username and email for project metadata.
+- **Customizable Templates**: Uses a flexible system to tailor generated files.
+- **Package Management**: Organizes dependencies with package-inferred systems.
+- **Testing Ready**: Includes the [FiveAM](https://github.com/lispci/fiveam) testing framework with test runners.
+- **Build Tools**: Comes with a `Makefile` for easy compilation and cleanup.
 
-- [UIOP](https://quickref.common-lisp.net/uiop.html) — portability layer (part of ASDF)  
-- [Marie](https://github.com/krei-systems/marie/tree/main) — utility library  
-- [FiveAM](https://github.com/lispci/fiveam) — unit testing framework  
----
+## Prerequisites
+You'll need these libraries (most Lisp environments include UIOP):
+- [UIOP](https://quickref.common-lisp.net/uiop.html) (included with ASDF)
+- [Marie](https://github.com/krei-systems/marie/tree/main) (utility library)
+- [FiveAM](https://github.com/lispci/fiveam) (for unit testing)
 
 ## Installation
+1. Clone or download this repository:
+   ```bash
+   $ git clone https://github.com/your-username/cl-project-builder.git
+   ```
+2. Load it in your Lisp environment:
+   ```lisp
+   CL-USER> (ql:quickload :cl-project-builder)
+   ```
 
-1. Clone this repository or download the project.
-2. Load it into your Lisp environment:
-
-    ```lisp
-    (ql:quickload :cl-project-builder)
-    ```
-
----
-
-## Usage
-
-### Terminal
-
-To create a project in the default location (`~/common-lisp/`):
-
-```bash
-$ sbcl
-$ (cl-project-builder/src/main:create-project^cr8 "my-awesome-project")
-;; or
-$ (cl-project-builder/src/main:cr8 "my-project")
-```
-
-To create a project in a specific directory:
-
-```bash
-$ (cl-project-builder/src/main:create-project^cr8 "my-project" :target "/my/specified/path")
-;; or
-$ (cl-project-builder/src/main:cr8 "my-project" :target "/my/specified/path")
-```
-### Makefile
-```make
-$ make help
-$ make setup
-$ make
-```
-
-### REPL (SBCL)
+## Get started
+### From the Lisp REPL
+Create a project in the default location (`~/common-lisp/`):
 ```lisp
 CL-USER> (ql:quickload :cl-project-builder)
 CL-USER> (cl-project-builder/src/main:cr8 "my-project")
-#P"/home/eldriv/common-lisp/my-project"
----
+#P"/home/your-username/common-lisp/my-project"
 ```
-### Generated Project Structure
 
-```plaintext
-├── Makefile
-├── my-project.asd
-├── my-project-tests.asd
-├── README.org
-├── src
-│   ├── build.lisp
-│   ├── driver.lisp
-│   ├── main.lisp
-│   └── user.lisp
-├── t
-│   ├── driver-tests.lisp
-│   ├── main-tests.lisp
-│   └── user-tests.lisp
-├── version.sexp
-└── version-tests.sexp
+Specify a custom directory:
+```lisp
+CL-USER> (cl-project-builder/src/main:cr8 "my-project" :target "/path/to/your/directory")
 ```
----
 
-# Working with Generated Projects
-
-To load and run your new project:
-
+### From the Terminal
+Launch SBCL and run:
 ```bash
 $ sbcl
-$ (ql:quickload :my-project)
-$ (in-package :my-project/src/main)
-$ (hello)
+* (ql:quickload :cl-project-builder)
+* (cl-project-builder/src/main:cr8 "my-project")
 ```
-
-Or use the generated `Makefile`:
-
+Or with a custom path:
 ```bash
-$ cd my-project
-$ make        # Builds the project
-$ make clean  # Cleans build artifacts
+sbcl
+* (cl-project-builder/src/main:cr8 "my-project" :target "/path/to/your/directory")
 ```
----
 
-## Customization
+### Using Makefile
+```make
+$ make
+====Common Lisp Project Generator====
 
-You can extend the template system by:
+📝 What is the name of the project?: my-project
 
-1. Adding new replacement functions to `*table*` in `specials.lisp`.
-2. Creating new file generators in the appropriate modules.
-3. Modifying `create-files` function under main.lisp to include additional files.
----
+📂 Creating project: my-project
+📁 Target directory: /home/eldriv/common-lisp/my-project
 
+🔧 Generating project structure...
+This is SBCL 2.4.10, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+To load "cl-project-builder":
+  Load 1 ASDF system:
+    cl-project-builder
+; Loading "cl-project-builder"
+.
+✅ Project 'my-project' created successfully!
+📂 Location: /home/eldriv/common-lisp/my-project
+
+```
+The generated project will look like this:
+```
+my-project/
+├── Makefile          # Build and manage your project
+├── my-project.asd    # ASDF system definition
+├── my-project-tests.asd  # Test system definition
+├── README.org        # Project documentation
+├── src/              # Source code
+│   ├── build.lisp    # Build script
+│   ├── driver.lisp   # Core functionality
+│   ├── main.lisp     # Entry point
+│   └── user.lisp     # User-defined code
+├── t/                # Tests
+│   ├── driver-tests.lisp  # Tests for driver
+│   ├── main-tests.lisp   # Tests for main
+│   └── user-tests.lisp   # Tests for user code
+├── version.sexp      # Project version
+└── version-tests.sexp  # Test version
+```
+
+## Working with the generated project
+1. Load your project:
+   ```lisp
+   (ql:quickload :my-project)
+   (in-package :my-project/src/main)
+   (hello)  ;; Try the sample function
+   ```
+
+2. Run tests using FiveAM:
+   ```lisp
+   (ql:quickload :my-project)
+   (asdf:test-system :my-project)
+   ```
+
+3. Build or clean with the `Makefile`:
+   ```bash
+   make        # Compile the project
+   make clean  # Remove build files
+   ```
+
+## Customizing Your Projects
+Want to tweak the generated files? You can:
+- Add custom replacement functions in `specials.lisp` (modify `*table*`).
+- Create new file generators in the relevant modules.
+- Update the `create-files` function in `main.lisp` to include additional files.
+
+## Need Help?
+- Check the [FiveAM documentation](https://github.com/lispci/fiveam) for testing tips.
+- Explore [ASDF](https://common-lisp.net/project/asdf/) for system configuration.
+- Reach out on the project's [GitHub Issues](https://github.com/eldriv/cl-project-builder/issues) for support or issues.
