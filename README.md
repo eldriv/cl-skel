@@ -130,3 +130,5 @@ To tweak the generated files, you can:
 - Check the [FiveAM documentation](https://github.com/lispci/fiveam) for testing tips.
 - Explore [ASDF](https://common-lisp.net/project/asdf/) for system configuration.
 - Reach out on the project's [GitHub Issues](https://github.com/eldriv/cl-project-builder/issues) for support or issues.
+
+> NOTE: This is macro semi codebase library, some approaches are written in macros. 
