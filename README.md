@@ -43,18 +43,18 @@ A fast and flexible tool to generate organized Common Lisp projects — with pro
 To create a project in the default location (`~/common-lisp/`):
 
 ```bash
-sbcl
-(cl-project-builder/src/main:create-project^cr8 "my-awesome-project")
+$ sbcl
+$ (cl-project-builder/src/main:create-project^cr8 "my-awesome-project")
 ;; or
-(cl-project-builder/src/main:cr8 "my-project")
+$ (cl-project-builder/src/main:cr8 "my-project")
 ```
 
 To create a project in a specific directory:
 
 ```bash
-(cl-project-builder/src/main:create-project^cr8 "my-project" :target "/my/specified/path")
+$ (cl-project-builder/src/main:create-project^cr8 "my-project" :target "/my/specified/path")
 ;; or
-(cl-project-builder/src/main:cr8 "my-project" :target "/my/specified/path")
+$ (cl-project-builder/src/main:cr8 "my-project" :target "/my/specified/path")
 ```
 ---
 
@@ -84,18 +84,18 @@ To create a project in a specific directory:
 To load and run your new project:
 
 ```bash
-sbcl
-(ql:quickload :my-project)
-(in-package :my-project/src/main)
-(hello)
+$ sbcl
+$ (ql:quickload :my-project)
+$ (in-package :my-project/src/main)
+$ (hello)
 ```
 
 Or use the generated `Makefile`:
 
 ```bash
-cd my-project
-make        # Builds the project
-make clean  # Cleans build artifacts
+$ cd my-project
+$ make        # Builds the project
+$ make clean  # Cleans build artifacts
 ```
 ---
 
