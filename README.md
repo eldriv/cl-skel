@@ -69,7 +69,7 @@ CL-USER> (ql:quickload :cl-project-builder)
 CL-USER> (cl-project-builder/src/main:cr8 "my-project")
 #P"/home/eldriv/common-lisp/my-project"
 ---
-
+```
 ### Generated Project Structure
 
 ```plaintext
@@ -91,7 +91,7 @@ CL-USER> (cl-project-builder/src/main:cr8 "my-project")
 ```
 ---
 
-### Working with Generated Projects
+# Working with Generated Projects
 
 To load and run your new project:
 
