@@ -1,3 +1,4 @@
+# === HEAD ===
 SHELL := $(shell which bash 2>/dev/null || which sh)
 MAKEFLAGS += --warn-undefined-variables
 MAKEFLAGS += --no-builtin-rules
@@ -11,9 +12,23 @@ PROJECT_BUILDER := cl-skel
 PROJECT_PACKAGE := cl-skel/src/main
 TARGET_DIR := $(HOME)/common-lisp
 
-.PHONY: all project project-name setup help clean
+# === Internal macro for generatingt ===
+define generate_project
+	echo "🔧 Generating project structure..."
+	$(LISP) --eval "(ql:quickload :$(PROJECT_BUILDER))" \
+		--eval "(in-package :$(PROJECT_PACKAGE))" \
+		--eval "(cr8 \"$(1)\")" \
+		--eval "(format t \"✅ Project '$(1)' created successfully!~%\")" \
+		--eval "(format t \"📂 Location: $(TARGET_DIR)/$(1)~%\")" \
+		--eval "(uiop:quit 0)" || { \
+			echo "❌ Error: Failed to create project. Make sure $(PROJECT_BUILDER) is available."; \
+			exit 1; \
+		}
+endef
 
-# Default target
+# === BODY ===
+.PHONY: all project project-name setup
+
 all: project
 
 project:
@@ -38,16 +53,7 @@ project:
 			exit 1; \
 		fi; \
 	fi && \
-	echo "🔧 Generating project structure..." && \
-	$(LISP) --eval "(ql:quickload :$(PROJECT_BUILDER))" \
-		--eval "(in-package :$(PROJECT_PACKAGE))" \
-		--eval "(cr8 \"$$PROJECT_NAME\")" \
-		--eval "(format t \"✅ Project '$$PROJECT_NAME' created successfully!~%\")" \
-		--eval "(format t \"📂 Location: $(TARGET_DIR)/$$PROJECT_NAME~%\")" \
-		--eval "(uiop:quit 0)" || { \
-		echo "❌ Error: Failed to create project. Make sure $(PROJECT_BUILDER) is available."; \
-		exit 1; \
-	}
+	$(call generate_project,$$PROJECT_NAME)
 
 project-name:
 	@if [ -z "$(PROJECT)" ]; then \
@@ -65,16 +71,7 @@ project-name:
 			exit 1; \
 		fi; \
 	fi
-	@echo "🔧 Generating project structure..."
-	@$(LISP) --eval "(ql:quickload :$(PROJECT_BUILDER))" \
-		--eval "(in-package :$(PROJECT_PACKAGE))" \
-		--eval "(cr8 \"$(PROJECT)\")" \
-		--eval "(format t \"✅ Project '$(PROJECT)' created successfully!~%\")" \
-		--eval "(format t \"📂 Location: $(TARGET_DIR)/$(PROJECT)~%\")" \
-		--eval "(uiop:quit 0)" || { \
-		echo "❌ Error: Failed to create project. Make sure $(PROJECT_BUILDER) is available."; \
-		exit 1; \
-	}
+	$(call generate_project,$(PROJECT))
 
 setup:
 	@echo "⚙️  Setting up $(PROJECT_BUILDER)..."
