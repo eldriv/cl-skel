@@ -19,7 +19,7 @@ You'll need these libraries (most Lisp environments include UIOP):
 ## Installation
 1. Clone or download this repository:
    ```bash
-   $ git clone https://github.com/your-username/cl-project-builder.git
+   $ git clone https://github.com/eldriv/cl-project-builder.git
    ```
 2. Load it in your Lisp environment:
    ```lisp
