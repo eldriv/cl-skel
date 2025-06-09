@@ -36,7 +36,7 @@ A fast and flexible tool to generate organized Common Lisp projects — with pro
 
 ---
 
-## 🛠️ Usage
+## Usage
 
 ### Basic Project Creation
 
