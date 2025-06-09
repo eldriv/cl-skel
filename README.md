@@ -122,9 +122,9 @@ my-project/
 
 ## Customizing Your Projects
 To tweak the generated files, you can:
-- Add custom replacement functions in `specials.lisp` (modify `*table*`).
+- Add custom replacement functions in `specials.lisp` (modify [*table*](https://github.com/eldriv/cl-project-builder/blob/main/src/templates/specials.lisp)).
 - Create new file generators in the relevant modules.
-- Update the `create-files` function in `main.lisp` to include additional files.
+- Update the `create-files` function in [main.lisp](https://github.com/eldriv/cl-project-builder/blob/main/src/main.lisp) to include additional files.
 
 ## Need Help?
 - Check the [FiveAM documentation](https://github.com/lispci/fiveam) for testing tips.
