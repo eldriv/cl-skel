@@ -1,5 +1,4 @@
-# CL-Project-Builder: Create Common Lisp Projects with Ease
-
+# Overview
 CL Project Builder is a tool to quickly set up organized Common Lisp projects with a clean structure, ASDF system definitions, and built-in testing. Whether you're starting a new project or prototyping, this tool streamlines the process so you can focus on coding.
 
 ## What It Does
