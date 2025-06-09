@@ -11,10 +11,10 @@ CL Project Builder is a tool to quickly set up organized Common Lisp projects wi
 - **Build Tools**: Comes with a `Makefile` for easy compilation and cleanup.
 
 ## Prerequisites
-You'll need these libraries (most Lisp environments include UIOP):
-- [UIOP](https://quickref.common-lisp.net/uiop.html) (included with ASDF)
-- [Marie](https://github.com/krei-systems/marie/tree/main) (utility library)
-- [FiveAM](https://github.com/lispci/fiveam) (for unit testing)
+You'll need these libraries:
+- [UIOP](https://quickref.common-lisp.net/uiop.html) 
+- [Marie](https://github.com/krei-systems/marie/tree/main) (Utility library)
+- [FiveAM](https://github.com/lispci/fiveam) (for Unit testing)
 
 ## Installation
 1. Clone or download this repository:
