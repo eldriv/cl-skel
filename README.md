@@ -32,7 +32,7 @@ Create a project in the default location (`~/common-lisp/`):
 ```lisp
 CL-USER> (ql:quickload :cl-skel)
 CL-USER> (cl-skel/src/main:cr8 "my-project")
-#P"/home/your-username/common-lisp/my-project"
+#P"/home/hostname/common-lisp/my-project"
 ```
 
 Specify a custom directory:
