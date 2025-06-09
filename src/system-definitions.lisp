@@ -5,9 +5,9 @@
 
 (in-package #:cl-project-builder/src/system-definitions)
 
-(def create-src-asdf ()
-  "Generate the main ASDF file."
-  (format-with-replacements ";;;; ${project}.asd --- top-level ASDF file for ${project}
+(deftemplate* src-asdf
+  "Generate `/my-project.asd'."
+  ";;;; ${project}.asd --- Top-level ASDF file for ${project}
 (defsystem #:${project}
     :description \"${project}\"
     :version (:read-file-form #P\"version.sexp\")
@@ -20,10 +20,11 @@
                  #:${project}/src/driver
                  #:${project}/src/user)
     :in-order-to ((test-op (test-op \"${project}-tests\"))))
-"))
-(def create-t-asdf ()
-  "Generate the test ASDF file."
-  (format-with-replacements  ";;;; ${project}-tests.asd --- test ASDF file for ${project}
+")
+
+(deftemplate* t-asdf
+  "Generate `/t-my-project.asd'."
+  ";;;; ${project}-tests.asd --- Test ASDF file for ${project}
 (defsystem #:${project}-tests
     :description \"\"
     :version (:read-file-form #P\"version-tests.sexp\")
@@ -38,4 +39,4 @@
                  #:${project}/t/driver-tests
                  #:${project}/t/user-tests)
     :perform (test-op (o c) (uiop:symbol-call :${project}/t/main-tests :run-tests)))
-"))
+")

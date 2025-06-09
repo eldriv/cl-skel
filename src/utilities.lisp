@@ -107,3 +107,20 @@
                   (uiop:ensure-all-directories-exist (list path))
                 (error (e)
                   (warn "Failed to create directory ~A: ~A" path e))))))
+
+;;; Template Macros
+
+(defm deftemplate (name description &body template-body)
+  "Define a template generation function with NAME, DESCRIPTION, and TEMPLATE-BODY.
+   The function will be named CREATE-<NAME> and will generate the specified template."
+  (let ((func-name (intern (format nil "CREATE-~A" (symbol-name name)) *package*)))
+    `(def ,func-name ()
+       ,description
+       (format-with-replacements ,(first template-body)))))
+
+(defm deftemplate* (name description &body template-body)
+  "Like DEFTEMPLATE but uses FORMAT-WITH-REPLACEMENTS* (no header)."
+  (let ((func-name (intern (format nil "CREATE-~A" (symbol-name name)) *package*)))
+    `(def ,func-name ()
+       ,description
+       (format-with-replacements* ,(first template-body)))))

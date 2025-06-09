@@ -73,4 +73,3 @@
 
 (defv *cl-project* "cl-project"
   "The default project name.")
-

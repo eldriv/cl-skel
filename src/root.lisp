@@ -1,21 +1,28 @@
 (uiop:define-package #:cl-project-builder/src/root
   (:use #:cl
         #:marie
-        #:cl-project-builder/src/specials
         #:cl-project-builder/src/utilities))
 
 (in-package #:cl-project-builder/src/root)
 
-(def create-readme-file ()
-  "Generate `/README.org'."
-  (format-with-replacements* "#+title: ${project}
+(def create-src-version-file ()
+  "Generate `/version.sexp'."
+  (fmt "\"1.0.0\""))
+
+(def create-t-version-file ()
+  "Generate `/version.sexp'."
+  (fmt "\"1.0.0\""))
+
+(deftemplate* readme-file
+    "Generate `/Readme.md'."
+  "#+title: ${project}
 #+author: ${author}
 #+email: ${email}
-"))
+")
 
-(def create-gitignore-file ()
-  "Generate `/.gitignore'."
-  (format-with-replacements* "*.fasl
+(deftemplate* gitignore-file
+    "Generate `/.gitignore'."
+  "*.fasl
 *.64yfasl
 *.lisp-temp
 *.dfsl
@@ -32,11 +39,11 @@
 *.sx32fsl
 *.wx64fsl
 *.wx32fsl
-"))
+")
 
-(def create-makefile ()
-  "Generate `/makefile'."
-  (format-with-replacements* "SHELL := bash
+(deftemplate* makefile
+    "Generate `/Makefile'."
+  "SHELL := bash
 MAKEFLAGS += --warn-undefined-variables
 MAKEFLAGS += --no-builtin-rules
 
@@ -56,8 +63,4 @@ $(NAME):
 
 clean:
 	@rm -f $(NAME)
-"))
-
-(def create-src-version-file ()
-  "Generate `/version.sexp'."
-  (fmt "\"0.0.1\""))
+")

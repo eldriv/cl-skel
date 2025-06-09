@@ -7,13 +7,13 @@
 
 ;;; Test Files Generation
 
-(def create-t-version-file ()
+(def t-version-file ()
   "Generate `/version-tests.sexp'."
-  (fmt "\"0.0.1\""))
+  (fmt "\"1.0.0\""))
 
-(def create-t-main-file ()
-  "Generate `/t/main-tests.lisp'."
-  (format-with-replacements  ";;;; main-tests.lisp -- main functions tests
+(deftemplate t-main-file
+    "Generate `/main-tests.lisp'."
+  ";;;; main-tests.lisp -- Main functions tests
 
 (uiop:define-package #:${project}/t/main-tests
   (:use #:cl #:marie
@@ -25,11 +25,11 @@
 (def run-tests ()
   \"Run all the tests defined in the suite.\"
   (run-all-tests))
-"))
+")
 
-(def create-t-driver-file ()
-  "Generate `/t/driver-tests.lisp'."
-  (format-with-replacements  ";;;; driver-tests.lisp --- symbol driver tests
+(deftemplate t-driver-file
+    "Generate `/driver-tests.lisp'."
+  ";;;; driver-tests.lisp --- Driver tests
 
 (uiop:define-package :${project}/t/driver-tests
   (:nicknames #:${project}/t)
@@ -39,16 +39,15 @@
 
 (provide \"${project}/t\")
 (provide \"${PROJECT}/T\")
-"))
+")
 
-(def create-t-user-file ()
-  "Generate `/t/user-tests.lisp'."
-  (format-with-replacements  ";;;; user-tests.lisp --- user sandbox tests
+(deftemplate t-user-file
+    "Generate `/users-tests.lisp'."
+  ";;;; user-tests.lisp --- User playground tests
 
 (uiop:define-package :${project}/t/user-tests
   (:nicknames #:${project}-tests-user)
   (:use #:cl #:marie
         #:${project}/t/driver-tests))
 
-(in-package #:${project}-tests-user)
-"))
+(in-package #:${project}-tests-user)")

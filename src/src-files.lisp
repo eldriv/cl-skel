@@ -8,31 +8,31 @@
 
 ;; Source Files Generation
 
-(def create-src-specials ()
-  "Generate `/src/specials.lisp'."
-  (format-with-replacements ";;;; specials.lisp --- special variables
+(deftemplate src-specials
+    "Generate `/src/specials.lisp'."
+  ";;;; specials.lisp --- Special variables
 
 (uiop:define-package #:${project}/src/specials
   (:use #:cl
         #:marie))
 
 (in-package #:${project}/src/specials)
-"))
+")
 
-(def create-src-utilities ()
-  "Generate `/src/utilities.lisp'."
-  (format-with-replacements ";;;; utilities.lisp --- common utilities
+(deftemplate src-utilities
+    "Generate `/src/utilities.lisp'."
+  ";;;; utilities.lisp --- Common utilities
 
 (uiop:define-package #:${project}/src/utilities
   (:use #:cl
         #:marie))
 
 (in-package #:${project}/src/utilities)
-"))
+")
 
-(def create-src-main-file ()
-  "Generate `/src/main.lisp'."
-  (format-with-replacements ";;;; main.lisp --- entrypoints functions
+(deftemplate src-main-file
+    "Generate `/src/main.lisp'."
+  ";;;; main.lisp --- Entrypoints functions
 
 (uiop:define-package #:${project}/src/main
   (:use #:cl
@@ -43,11 +43,11 @@
 (def main^hello ()
   \"Display a greeting.\"
   (format t \"Hello, world!~%\"))
-"))
+")
 
-(def create-src-driver ()
-  "Generate `/src/driver.lisp'."
-  (format-with-replacements ";;;; driver.lisp --- symbol driver
+(deftemplate src-driver
+    "Generate `/src/driver.lisp'."
+  ";;;; driver.lisp --- Symbol driver
 
 (uiop:define-package #:${project}/src/driver
   (:nicknames #:${project})
@@ -56,11 +56,11 @@
 
 (provide \"${project}\")
 (provide \"${PROJECT}\")
-"))
+")
 
-(def create-src-user ()
-  "Generate `/src/user.lisp'."
-  (format-with-replacements ";;;; user.lisp --- user sandbox
+(deftemplate src-user
+    "Generate `/src/user.lisp'."
+  ";;;; user.lisp --- User playground
 
 (uiop:define-package #:${project}/src/user
   (:nicknames #:${project}-user)
@@ -69,11 +69,11 @@
         #:${project}/src/driver))
 
 (in-package #:${project}-user)
-"))
+")
 
-(def create-src-build ()
-  "Generate `/src/build.lisp'."
-  (format-with-replacements "(require 'asdf)
+(deftemplate src-build
+    "Generate `/src/build.lisp'."
+  "(require 'asdf)
 (defun cwd-name ()
   (multiple-value-bind (type list &rest rest)
       (uiop:split-unix-namestring-directory-components
@@ -85,4 +85,4 @@
 (push (uiop:getcwd) asdf:*central-registry*)
 (ql:quickload (cwd-keyword))
 (asdf:make (cwd-keyword))
-"))
+")
