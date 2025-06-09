@@ -61,7 +61,7 @@ $ make
 📝 What is the name of the project?: my-project
 
 📂 Creating project: my-project
-📁 Target directory: /home/eldriv/common-lisp/my-project
+📁 Target directory: /home/hostname/common-lisp/my-project
 
 🔧 Generating project structure...
 This is SBCL 2.4.10, an implementation of ANSI Common Lisp.
@@ -77,7 +77,7 @@ To load "cl-project-builder":
 ; Loading "cl-project-builder"
 .
 ✅ Project 'my-project' created successfully!
-📂 Location: /home/eldriv/common-lisp/my-project
+📂 Location: /home/hostname/common-lisp/my-project
 
 ```
 The generated project will look like this:
