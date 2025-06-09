@@ -1,6 +1,6 @@
 ;;;; -*- mode: lisp; syntax: common-lisp; base: 10; -*-
-;;;; cl-project-builder.asd --- top-level ASDF file for cl-project-builder
-(defsystem #:cl-project-builder
+;;;; cl-skel.asd --- top-level ASDF file for cl-skel
+(defsystem #:cl-skel
   :version (:read-file-form #P"version.lisp")
   :description "A Modern Common Lisp Project Generator with Marie's Support utilities."
   :author "Eldriv"
@@ -9,11 +9,11 @@
   :class :package-inferred-system
   :depends-on (#:uiop
                #:marie
-               #:cl-project-builder/src/templates/specials
-               #:cl-project-builder/src/utilities
-               #:cl-project-builder/src/templates/root
-               #:cl-project-builder/src/templates/system-definitions
-               #:cl-project-builder/src/templates/src-files
-               #:cl-project-builder/src/templates/test-files
-               #:cl-project-builder/src/main)
+               #:cl-skel/src/templates/specials
+               #:cl-skel/src/utilities
+               #:cl-skel/src/templates/root
+               #:cl-skel/src/templates/system-definitions
+               #:cl-skel/src/templates/src-files
+               #:cl-skel/src/templates/test-files
+               #:cl-skel/src/main)
   :in-order-to ((test-op (test-op "proj-test"))))

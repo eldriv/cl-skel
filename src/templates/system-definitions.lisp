@@ -1,9 +1,9 @@
-(uiop:define-package #:cl-project-builder/src/templates/system-definitions
+(uiop:define-package #:cl-skel/src/templates/system-definitions
   (:use #:cl
         #:marie
-        #:cl-project-builder/src/utilities))
+        #:cl-skel/src/utilities))
 
-(in-package #:cl-project-builder/src/templates/system-definitions)
+(in-package #:cl-skel/src/templates/system-definitions)
 
 (deftemplate* src-asdf
     "Generate `/my-project.asd'."

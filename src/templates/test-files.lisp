@@ -1,9 +1,9 @@
-(uiop:define-package #:cl-project-builder/src/templates/test-files
+(uiop:define-package #:cl-skel/src/templates/test-files
   (:use #:cl
         #:marie
-        #:cl-project-builder/src/utilities))
+        #:cl-skel/src/utilities))
 
-(in-package #:cl-project-builder/src/templates/test-files)
+(in-package #:cl-skel/src/templates/test-files)
 
 ;;; Test Files Generation
 

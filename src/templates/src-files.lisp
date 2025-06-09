@@ -1,9 +1,9 @@
-(uiop:define-package #:cl-project-builder/src/templates/src-files
+(uiop:define-package #:cl-skel/src/templates/src-files
   (:use #:cl
         #:marie
-        #:cl-project-builder/src/utilities))
+        #:cl-skel/src/utilities))
 
-(in-package #:cl-project-builder/src/templates/src-files)
+(in-package #:cl-skel/src/templates/src-files)
 
 
 ;; Source Files Generation

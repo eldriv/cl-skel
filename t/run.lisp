@@ -1,7 +1,7 @@
 ;;;; -*- mode: lisp; syntax: common-lisp; base: 10; coding: utf-8-unix; external-format: (:utf-8 :eol-style :lf); -*-
 ;;;; tests.lisp --- main file for the unit tests
 
-(uiop:define-package #:cl-project-builder/t/run
+(uiop:define-package #:cl-skel/t/run
   (:use #:cl
         #:fiveam
         #:marie))

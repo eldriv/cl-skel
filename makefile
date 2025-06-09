@@ -7,8 +7,8 @@ MAKEFLAGS += --no-builtin-rules
 .DELETE_ON_ERROR:
 
 LISP := sbcl
-PROJECT_BUILDER := cl-project-builder
-PROJECT_PACKAGE := cl-project-builder/src/main
+PROJECT_BUILDER := cl-skel
+PROJECT_PACKAGE := cl-skel/src/main
 TARGET_DIR := $(HOME)/common-lisp
 
 .PHONY: all project project-name setup help clean

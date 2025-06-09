@@ -1,9 +1,9 @@
-(uiop:define-package #:cl-project-builder/src/utilities
+(uiop:define-package #:cl-skel/src/utilities
   (:use #:cl
         #:marie
-        #:cl-project-builder/src/templates/specials))
+        #:cl-skel/src/templates/specials))
 
-(in-package #:cl-project-builder/src/utilities)
+(in-package #:cl-skel/src/utilities)
 
 ;;; Strings and pathnames helpers
 

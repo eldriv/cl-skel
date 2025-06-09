@@ -1,5 +1,5 @@
 # Overview
-CL Project Builder is a tool to quickly set up organized Common Lisp projects with a clean structure, ASDF system definitions, and built-in testing. Whether you're starting a new project or prototyping, this tool streamlines the process so you can focus on coding.
+CL Skel is a tool to quickly set up organized Common Lisp projects with a clean structure, ASDF system definitions, and built-in testing. Whether you're starting a new project or prototyping, this tool streamlines the process so you can focus on coding.
 
 ## What It Does
 - **Sets Up Project Structure**: Creates `src/` and `t/` directories for your code and tests.
@@ -19,38 +19,38 @@ You'll need these libraries:
 ## Installation
 1. Clone or download this repository:
    ```bash
-   $ git clone https://github.com/eldriv/cl-project-builder.git
+   $ git clone https://github.com/eldriv/cl-skel.git
    ```
 2. Load it in your Lisp environment:
    ```lisp
-   CL-USER> (ql:quickload :cl-project-builder)
+   CL-USER> (ql:quickload :cl-skel)
    ```
 
 ## Get started
 ### From the Lisp REPL
 Create a project in the default location (`~/common-lisp/`):
 ```lisp
-CL-USER> (ql:quickload :cl-project-builder)
-CL-USER> (cl-project-builder/src/main:cr8 "my-project")
+CL-USER> (ql:quickload :cl-skel)
+CL-USER> (cl-skel/src/main:cr8 "my-project")
 #P"/home/your-username/common-lisp/my-project"
 ```
 
 Specify a custom directory:
 ```lisp
-CL-USER> (cl-project-builder/src/main:cr8 "my-project" :target "/path/to/your/directory")
+CL-USER> (cl-skel/src/main:cr8 "my-project" :target "/path/to/your/directory")
 ```
 
 ### From the Terminal
 Launch SBCL and run:
 ```bash
 $ sbcl
-* (ql:quickload :cl-project-builder)
-* (cl-project-builder/src/main:cr8 "my-project")
+* (ql:quickload :cl-skel)
+* (cl-skel/src/main:cr8 "my-project")
 ```
 Or with a custom path:
 ```bash
 sbcl
-* (cl-project-builder/src/main:cr8 "my-project" :target "/path/to/your/directory")
+* (cl-skel/src/main:cr8 "my-project" :target "/path/to/your/directory")
 ```
 
 ### Using Makefile
@@ -71,10 +71,10 @@ SBCL is free software, provided as is, with absolutely no warranty.
 It is mostly in the public domain; some portions are provided under
 BSD-style licenses.  See the CREDITS and COPYING files in the
 distribution for more information.
-To load "cl-project-builder":
+To load "cl-skel":
   Load 1 ASDF system:
-    cl-project-builder
-; Loading "cl-project-builder"
+    cl-skel
+; Loading "cl-skel"
 .
 ✅ Project 'my-project' created successfully!
 📂 Location: /home/hostname/common-lisp/my-project
@@ -122,13 +122,13 @@ my-project/
 
 ## Customizing Your Projects
 To tweak the generated files, you can:
-- Add custom replacement functions in `specials.lisp` (modify [*table*](https://github.com/eldriv/cl-project-builder/blob/main/src/templates/specials.lisp)).
+- Add custom replacement functions in `specials.lisp` (modify [*table*](https://github.com/eldriv/cl-skel/blob/main/src/templates/specials.lisp)).
 - Create new file generators in the relevant modules.
-- Update the `create-files` function in [main.lisp](https://github.com/eldriv/cl-project-builder/blob/main/src/main.lisp) to include additional files.
+- Update the `create-files` function in [main.lisp](https://github.com/eldriv/cl-skel/blob/main/src/main.lisp) to include additional files.
 
 ## Need Help?
 - Check the [FiveAM documentation](https://github.com/lispci/fiveam) for testing tips.
 - Explore [ASDF](https://common-lisp.net/project/asdf/) for system configuration.
-- Reach out on the project's [GitHub Issues](https://github.com/eldriv/cl-project-builder/issues) for support or issues.
+- Reach out on the project's [GitHub Issues](https://github.com/eldriv/cl-skel/issues) for support or issues.
 
 > NOTE: This is macro semi codebase library, some approaches are written in macros. 

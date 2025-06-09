@@ -1,14 +1,14 @@
-(uiop:define-package #:cl-project-builder/src/main
+(uiop:define-package #:cl-skel/src/main
   (:use #:cl
         #:marie
-        #:cl-project-builder/src/templates/specials
-        #:cl-project-builder/src/utilities
-        #:cl-project-builder/src/templates/root
-        #:cl-project-builder/src/templates/system-definitions
-        #:cl-project-builder/src/templates/src-files
-        #:cl-project-builder/src/templates/test-files))
+        #:cl-skel/src/templates/specials
+        #:cl-skel/src/utilities
+        #:cl-skel/src/templates/root
+        #:cl-skel/src/templates/system-definitions
+        #:cl-skel/src/templates/src-files
+        #:cl-skel/src/templates/test-files))
 
-(in-package #:cl-project-builder/src/main)
+(in-package #:cl-skel/src/main)
 
 ;;; Entry points / main entry
 
