@@ -12,29 +12,24 @@
   (merge-pathnames path1 (uiop:ensure-directory-pathname path2)))
 
 (def substitute-all (string part replacement &key (test #'char=))
-  "Return a new string in which all the occurences of PART in STRING is replaced
- with REPLACEMENT."
-  (let ((result (make-array 0 :element-type 'character :fill-pointer 0 :adjustable t))
-        (part-length (length part))
-        (string-length (length string))
-        (start 0))
-    (loop
-      (let ((pos (search part string :start2 start :test test)))
-        (if pos
-            (progn
-              ;; Add the part before the match
-              (loop :for i :from start :below pos
-                    :do (vector-push-extend (char string i) result))
-              ;; Add the replacement
-              (loop :for char :across replacement
-                    :do (vector-push-extend char result))
-              (setf start (+ pos part-length)))
-            (progn
-              ;; Add the remaining part
-              (loop :for i :from start :below string-length
-                    :do (vector-push-extend (char string i) result))
-              (return)))))
-    (coerce result 'string)))
+  "Return a new string in which all occurrences of PART in STRING are replaced with REPLACEMENT."
+  (with-output-to-string (out)
+    (let ((part-length (length part))
+          (string-length (length string)))
+      (do ((start 0))
+          ((>= start string-length))
+        (let ((pos (search part string :start2 start :test test)))
+          (if pos
+              (progn
+                ;; Write part before match
+                (write-string string out :start start :end pos)
+                ;; Write replacement
+                (write-string replacement out)
+                (setf start (+ pos part-length)))
+              (progn
+                ;; Write remaining string
+                (write-string string out :start start :end string-length)
+                (setf start string-length))))))))
 
 (def lookup-replacement-fn (string)
   "Return the transformation function for STRING."
