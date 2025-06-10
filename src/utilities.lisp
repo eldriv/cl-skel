@@ -56,9 +56,7 @@
 (def format-with-replacements (string &key project no-header)
   "Return a string with pre-defined substitutions."
   (perform-all-replacements
-   (if no-header
-       (format nil "~A" string)
-       (format nil "~A~%~A" +header+ string))
+   (if no-header (fmt "~A" string) (fmt "~A~%~A" +header+ string))
    (or project *cl-project*)))
 
 (def format-with-replacements* (&rest args)
