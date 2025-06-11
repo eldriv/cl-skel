@@ -80,15 +80,6 @@ To load "cl-skel":
 📂 Location: /home/hostname/common-lisp/my-project
 
 ```
-If you want to delete the newest generated folder project under `~/common-lisp`
-
-``` bash
-make clean
-🧹 Cleaning latest generated project in /home/eldriv/common-lisp...
-📁 Deleting: /home/hostname/common-lisp/my-project/
-✅ Removed successfully.
-```
-
 The generated project will look like this:
 ```
 my-project/
@@ -107,6 +98,26 @@ my-project/
 │   └── user-tests.lisp   # Tests for user code
 ├── version.sexp      # Project version
 └── version-tests.sexp  # Test version
+```
+If you want to delete the newest generated folder project under `~/common-lisp`
+
+``` bash
+$ make clean
+🧹 [Project Cleanup]
+📝 Enter the project name to delete: my-project
+📁 Found project: /home/eldriv/common-lisp/my-project
+⚠️  Are you sure you want to delete 'my-project'? (y/n): y
+✅ Project 'my-project' deleted successfully.
+
+$ make lst
+📁 List of projects in ~/common-lisp directory:
+
+adz
+asdf
+cl-skel
+..
+..
+..
 ```
 
 ## Working with the generated project
