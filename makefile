@@ -87,3 +87,14 @@ setup:
 		--eval "(in-package :$(PROJECT_PACKAGE))" \
 		--eval "(format t \"🔹 Available in package: cr8~%\")" \
 		--eval "(uiop:quit 0)"
+
+clean:
+	@echo "🧹 Cleaning latest generated project in $(TARGET_DIR)..."
+	@latest_folder=$$(ls -td $(TARGET_DIR)/*/ | head -n 1) && \
+	if [ -d "$$latest_folder" ]; then \
+		echo "📁 Deleting: $$latest_folder" && \
+		rm -rf "$$latest_folder" && \
+		echo "✅ Removed successfully."; \
+	else \
+		echo "❌ No directory found to clean."; \
+	fi
