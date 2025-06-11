@@ -148,6 +148,7 @@ To tweak the generated files, you can:
 
 ## Need Help?
 - Check the [FiveAM documentation](https://github.com/lispci/fiveam) for testing tips.
+- Check the [Marie](https://github.com/krei-systems/marie) for exporting symbols. 
 - Explore [ASDF](https://common-lisp.net/project/asdf/) for system configuration.
 - Reach out on the project's [GitHub Issues](https://github.com/eldriv/cl-skel/issues) for support or issues.
 
