@@ -138,8 +138,7 @@ cl-skel
    make        # Compile the project
    make clean  # Remove build files
    ```
-4. Marie Dependency
-The idea of Marie is to reduce boilerplate and simplify development. It enhances package hygiene by automatically exporting functions, variables, and other definitions unless explicitly told not to.
+4. Marie Dependency:  The idea from Marie is to reduce boilerplate and simplify development. It enhances package hygiene by automatically exporting functions, variables, and other definitions unless explicitly told not to.
 ```lisp
 (uiop:define-package #:ai/src/specials
   (:use #:cl
