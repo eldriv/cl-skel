@@ -34,7 +34,6 @@ CL-USER> (ql:quickload :cl-skel)
 CL-USER> (cl-skel/src/main:cr8 "my-project")
 #P"/home/hostname/common-lisp/my-project"
 ```
-
 Specify a custom directory:
 ```lisp
 CL-USER> (cl-skel/src/main:cr8 "my-project" :target "/path/to/your/directory")
@@ -139,6 +138,30 @@ cl-skel
    make        # Compile the project
    make clean  # Remove build files
    ```
+4. Marie Dependency
+The idea of Marie is to reduce boilerplate and simplify development. It enhances package hygiene by automatically exporting functions, variables, and other definitions unless explicitly told not to.
+```lisp
+(uiop:define-package #:ai/src/specials
+  (:use #:cl
+           #:marie))
+
+(defv *default-name* "world")
+```
+```lisp
+(uiop:define-package #:ai/src/main
+  (:use #:cl
+           #:marie
+           #:ai/src/specials))
+
+(def- greet (name)
+  (format nil "Hello, ~A!" name))
+
+(def- say-hello ()
+  (greet *default-name*))
+```
+It has two types of defining forms: 
+- The Exporting forms like def, defv, defm, etc., will automatically export the symbol from the package 
+- The Non-exporting forms like def-, defv-, etc., define internal/private symbols that remain unexported.
 
 ## Customizing Your Projects
 To tweak the generated files, you can:
@@ -148,7 +171,7 @@ To tweak the generated files, you can:
 
 ## Need Help?
 - Check the [FiveAM documentation](https://github.com/lispci/fiveam) for testing tips.
-- Check the [Marie](https://github.com/krei-systems/marie) for exporting symbols. 
+- See [Marie](https://github.com/krei-systems/marie)'s [README](https://github.com/krei-systems/marie/blob/main/README.org) for exporting symbols. 
 - Explore [ASDF](https://common-lisp.net/project/asdf/) for system configuration.
 - Reach out on the project's [GitHub Issues](https://github.com/eldriv/cl-skel/issues) for support or issues.
 
