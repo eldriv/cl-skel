@@ -80,6 +80,15 @@ To load "cl-skel":
 📂 Location: /home/hostname/common-lisp/my-project
 
 ```
+If you want to delete the newest generated folder project under `~/common-lisp`
+
+``` bash
+make clean
+🧹 Cleaning latest generated project in /home/eldriv/common-lisp...
+📁 Deleting: /home/hostname/common-lisp/my-project/
+✅ Removed successfully.
+```
+
 The generated project will look like this:
 ```
 my-project/
