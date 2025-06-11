@@ -14,7 +14,7 @@ TARGET_DIR := $(HOME)/common-lisp
 
 # === Internal macro for generatingt ===
 define generate_project
-	echo "🔧 Generating project structure..."
+	echo "⚡ Generating project structure..."
 	$(LISP) --eval "(ql:quickload :$(PROJECT_BUILDER))" \
 		--eval "(in-package :$(PROJECT_PACKAGE))" \
 		--eval "(cr8 \"$(1)\")" \
@@ -46,7 +46,7 @@ project:
 	echo "" && \
 	if [ -d "$(TARGET_DIR)/$$PROJECT_NAME" ]; then \
 		echo "⚠️  Warning: Directory $(TARGET_DIR)/$$PROJECT_NAME already exists."; \
-		printf "Continue? (y/N): "; \
+		printf "Continue? (y/n): "; \
 		read CONFIRM; \
 		if [ "$$CONFIRM" != "y" ] && [ "$$CONFIRM" != "Y" ]; then \
 			echo "🛑 Aborted."; \
@@ -64,7 +64,7 @@ project-name:
 	@echo "📁 Target directory: $(TARGET_DIR)/$(PROJECT)"
 	@if [ -d "$(TARGET_DIR)/$(PROJECT)" ]; then \
 		echo "⚠️  Warning: Directory $(TARGET_DIR)/$(PROJECT) already exists."; \
-		printf "Continue? (y/N): "; \
+		printf "Continue? (y/n): "; \
 		read CONFIRM; \
 		if [ "$$CONFIRM" != "y" ] && [ "$$CONFIRM" != "Y" ]; then \
 			echo "🛑 Aborted."; \
@@ -89,12 +89,31 @@ setup:
 		--eval "(uiop:quit 0)"
 
 clean:
-	@echo "🧹 Cleaning latest generated project in $(TARGET_DIR)..."
-	@latest_folder=$$(ls -td $(TARGET_DIR)/*/ | head -n 1) && \
-	if [ -d "$$latest_folder" ]; then \
-		echo "📁 Deleting: $$latest_folder" && \
-		rm -rf "$$latest_folder" && \
-		echo "✅ Removed successfully."; \
+	@echo "🧹 [Project Cleanup]"
+	@printf "📝 Enter the project name to delete: "
+	@read PROJECT_NAME && \
+	if [ -z "$$PROJECT_NAME" ]; then \
+		echo "❌ Error: Project name cannot be empty."; \
+		exit 1; \
+	fi && \
+	target_path="$(TARGET_DIR)/$$PROJECT_NAME" && \
+	if [ -d "$$target_path" ]; then \
+		echo "📁 Found project: $$target_path" && \
+		printf "⚠️  Are you sure you want to delete '$$PROJECT_NAME'? (y/n): " && \
+		read CONFIRM && \
+		if [ "$$CONFIRM" = "y" ] || [ "$$CONFIRM" = "Y" ]; then \
+			rm -rf "$$target_path" && \
+			echo "✅ Project '$$PROJECT_NAME' deleted successfully."; \
+		else \
+			echo "🛑 Deletion cancelled."; \
+		fi; \
 	else \
-		echo "❌ No directory found to clean."; \
+		echo "❌ Error: Project '$$PROJECT_NAME' not found in $(TARGET_DIR)"; \
+		echo "Available projects:"; \
+		ls -1 $(TARGET_DIR) 2>/dev/null | head -10 || echo "  (none found)"; \
 	fi
+
+lst:
+	@echo "📁 List of projects in ~/common-lisp directory:" 
+	@echo ""
+	@ls -1 $(TARGET_DIR) 2>/dev/null | head -10 || echo \
