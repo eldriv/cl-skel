@@ -82,21 +82,24 @@ To load "cl-skel":
 The generated project will look like this:
 ```
 my-project/
-├── Makefile          # Build and manage your project
-├── my-project.asd    # ASDF system definition
-├── my-project-tests.asd  # Test system definition
-├── README.org        # Project documentation
-├── src/              # Source code
-│   ├── build.lisp    # Build script
-│   ├── driver.lisp   # Core functionality
-│   ├── main.lisp     # Entry point
-│   └── user.lisp     # User-defined code
-├── t/                # Tests
-│   ├── driver-tests.lisp  # Tests for driver
-│   ├── main-tests.lisp   # Tests for main
-│   └── user-tests.lisp   # Tests for user code
-├── version.sexp      # Project version
-└── version-tests.sexp  # Test version
+├── makefile
+├── my-project.asd
+├── my-project-tests.asd
+├── README.org
+├── src
+│   ├── build.lisp
+│   ├── driver.lisp
+│   ├── main.lisp
+│   ├── specials.lisp
+│   ├── user.lisp
+│   └── utilities.lisp
+├── t
+│   ├── driver-tests.lisp
+│   ├── main-tests.lisp
+│   └── user-tests.lisp
+├── version.sexp
+└── version-tests.sexp
+
 ```
 If you want to delete the newest generated folder project under `~/common-lisp`
 
