@@ -12,6 +12,7 @@
 
 ;;; Entry points / main entry
 
+
 (def create-files (project project-dir)
   "Write the project files in PROJECT-DIR."
   (let ((project-source-dir (construct-path +src-directory+ project-dir))

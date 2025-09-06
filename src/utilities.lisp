@@ -67,19 +67,35 @@
 ;;; File System Helpers
 
 (defm with-out-files (dir &body file-specs)
-  "Define macro helper to avoid out-file repetition."
+  "Generate multiple files inside DIR using *cr8-file*."
   `(uiop:with-current-directory (,dir)
-     ,@(loop :for (fname contents) :in file-specs
-             :collect `(cr8-file (path ,@fname) ,contents))))
+     ,@(loop for (fname contents) in file-specs
+             collect `(funcall *cr8-file* ,(if (listp fname)
+                                               `(path ,@fname)
+                                               `(path ,fname))
+                       ,contents))))
+
+(defp *cr8-file* (cr8-file)
+  "Create an instance of the file generator")
+
+(def cr8-file ()
+  "Return a cr8-file function with an internal counter."
+  (let ((counter 0))
+    (lambda (path contents)
+      (incf counter)
+      (let* ((cwd (uiop:getcwd))
+             (abspath (merge-pathnames path cwd))
+             (logs (format nil "[~a/16] — ~a~%" counter (namestring abspath))))
+        (format t "~a" logs)  ;; print the log
+        (with-open-file (out abspath
+                             :direction :output
+                             :if-exists :supersede
+                             :if-does-not-exist :create)
+          (format out "~a" contents))))))
 
 (def path (name &optional type)
   "Return a pathname from NAME and TYPE."
   (make-pathname :name name :type type))
-
-(def cr8-file (path contents)
-  "Generate file in PATH and populate with CONTENTS."
-  (with-open-file (out path :direction :output :if-exists :supersede)
-    (format out contents)))
 
 (def enable-project-registry (project-dir)
   "Make the system indicated by PROJECT-DIR immediately accessible by ASDF."
@@ -110,6 +126,7 @@
     `(def ,func-name ()
        ,description
        (format-with-replacements ,(first template-body)))))
+
 
 (defm deftemplate* (name description &body template-body)
   "Like DEFTEMPLATE but uses FORMAT-WITH-REPLACEMENTS* (no header)."

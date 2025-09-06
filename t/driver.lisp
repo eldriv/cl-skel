@@ -2,7 +2,7 @@
 ;;;; driver.lisp --- top-level definitions for the tests
 
 (uiop:define-package #:cl-skel/t/driver
-  (:nicknames #:cl-proj-t)
+  (:nicknames #:cl-skel-t)
   (:use #:uiop/common-lisp
         #:marie)
   (:use-reexport #:cl-skel/t/run))
