@@ -32,7 +32,7 @@ Create a project in the default location (`~/common-lisp/`):
 ```lisp
 CL-USER> (ql:quickload :cl-skel)
 CL-USER> (cl-skel/src/main:cr8 "my-project")
-#P"/home/hostname/common-lisp/my-project"
+#P"/hostname/hostname/common-lisp/my-project"
 ```
 Specify a custom directory:
 ```lisp
@@ -60,7 +60,7 @@ $ make
 📝 What is the name of the project?: my-project
 
 📂 Creating project: my-project
-📁 Target directory: /home/eldriv/common-lisp/my-project
+📁 Target directory: /hostname/eldriv/common-lisp/my-project
 
 ⚡ Generating project structure...
 This is SBCL 2.4.10, an implementation of ANSI Common Lisp.
@@ -75,24 +75,24 @@ To load "cl-skel":
     cl-skel
 ; Loading "cl-skel"
 .
-[1/16] — /home/eldriv/common-lisp/my-project/README.org
-[2/16] — /home/eldriv/common-lisp/my-project/makefile
-[3/16] — /home/eldriv/common-lisp/my-project/.gitignore
-[4/16] — /home/eldriv/common-lisp/my-project/my-project.asd
-[5/16] — /home/eldriv/common-lisp/my-project/my-project-tests.asd
-[6/16] — /home/eldriv/common-lisp/my-project/version.sexp
-[7/16] — /home/eldriv/common-lisp/my-project/version-tests.sexp
-[8/16] — /home/eldriv/common-lisp/my-project/src/main.lisp
-[9/16] — /home/eldriv/common-lisp/my-project/src/driver.lisp
-[10/16] — /home/eldriv/common-lisp/my-project/src/user.lisp
-[11/16] — /home/eldriv/common-lisp/my-project/src/build.lisp
-[12/16] — /home/eldriv/common-lisp/my-project/src/utilities.lisp
-[13/16] — /home/eldriv/common-lisp/my-project/src/specials.lisp
-[14/16] — /home/eldriv/common-lisp/my-project/t/main-tests.lisp
-[15/16] — /home/eldriv/common-lisp/my-project/t/driver-tests.lisp
-[16/16] — /home/eldriv/common-lisp/my-project/t/user-tests.lisp
+[1/16] — /hostname/common-lisp/my-project/README.org
+[2/16] — /hostname/common-lisp/my-project/makefile
+[3/16] — /hostname/common-lisp/my-project/.gitignore
+[4/16] — /hostname/common-lisp/my-project/my-project.asd
+[5/16] — /hostname/common-lisp/my-project/my-project-tests.asd
+[6/16] — /hostname/common-lisp/my-project/version.sexp
+[7/16] — /hostname/common-lisp/my-project/version-tests.sexp
+[8/16] — /hostname/common-lisp/my-project/src/main.lisp
+[9/16] — /hostname/common-lisp/my-project/src/driver.lisp
+[10/16] — /hostname/common-lisp/my-project/src/user.lisp
+[11/16] — /hostname/common-lisp/my-project/src/build.lisp
+[12/16] — /hostname/common-lisp/my-project/src/utilities.lisp
+[13/16] — /hostname/common-lisp/my-project/src/specials.lisp
+[14/16] — /hostname/common-lisp/my-project/t/main-tests.lisp
+[15/16] — /hostname/common-lisp/my-project/t/driver-tests.lisp
+[16/16] — /hostname/common-lisp/my-project/t/user-tests.lisp
 ✅ Project 'my-project' created successfully!
-📂 Location: /home/eldriv/common-lisp/my-project
+📂 Location: /hostname/common-lisp/my-project
 ```
 The generated project will look like this:
 ```
@@ -122,7 +122,7 @@ If you want to delete the newest generated folder project under `~/common-lisp`
 $ make clean
 🧹 [Project Cleanup]
 📝 Enter the project name to delete: my-project
-📁 Found project: /home/eldriv/common-lisp/my-project
+📁 Found project: /hostname/common-lisp/my-project
 ⚠️  Are you sure you want to delete 'my-project'? (y/n): y
 ✅ Project 'my-project' deleted successfully.
 
