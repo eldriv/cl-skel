@@ -54,15 +54,15 @@ sbcl
 
 ### Using Makefile
 ```make
-$ make
-====Common Lisp Project Generator====
+$ make 
+[Common Lisp Project Generator]
 
 📝 What is the name of the project?: my-project
 
 📂 Creating project: my-project
-📁 Target directory: /home/hostname/common-lisp/my-project
+📁 Target directory: /home/eldriv/common-lisp/my-project
 
-🔧 Generating project structure...
+⚡ Generating project structure...
 This is SBCL 2.4.10, an implementation of ANSI Common Lisp.
 More information about SBCL is available at <http://www.sbcl.org/>.
 
@@ -75,9 +75,24 @@ To load "cl-skel":
     cl-skel
 ; Loading "cl-skel"
 .
+[1/16] — /home/eldriv/common-lisp/my-project/README.org
+[2/16] — /home/eldriv/common-lisp/my-project/makefile
+[3/16] — /home/eldriv/common-lisp/my-project/.gitignore
+[4/16] — /home/eldriv/common-lisp/my-project/my-project.asd
+[5/16] — /home/eldriv/common-lisp/my-project/my-project-tests.asd
+[6/16] — /home/eldriv/common-lisp/my-project/version.sexp
+[7/16] — /home/eldriv/common-lisp/my-project/version-tests.sexp
+[8/16] — /home/eldriv/common-lisp/my-project/src/main.lisp
+[9/16] — /home/eldriv/common-lisp/my-project/src/driver.lisp
+[10/16] — /home/eldriv/common-lisp/my-project/src/user.lisp
+[11/16] — /home/eldriv/common-lisp/my-project/src/build.lisp
+[12/16] — /home/eldriv/common-lisp/my-project/src/utilities.lisp
+[13/16] — /home/eldriv/common-lisp/my-project/src/specials.lisp
+[14/16] — /home/eldriv/common-lisp/my-project/t/main-tests.lisp
+[15/16] — /home/eldriv/common-lisp/my-project/t/driver-tests.lisp
+[16/16] — /home/eldriv/common-lisp/my-project/t/user-tests.lisp
 ✅ Project 'my-project' created successfully!
-📂 Location: /home/hostname/common-lisp/my-project
-
+📂 Location: /home/eldriv/common-lisp/my-project
 ```
 The generated project will look like this:
 ```

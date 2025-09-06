@@ -66,18 +66,6 @@
 
 ;;; File System Helpers
 
-(defm with-out-files (dir &body file-specs)
-  "Generate multiple files inside DIR using *cr8-file*."
-  `(uiop:with-current-directory (,dir)
-     ,@(loop for (fname contents) in file-specs
-             collect `(funcall *cr8-file* ,(if (listp fname)
-                                               `(path ,@fname)
-                                               `(path ,fname))
-                       ,contents))))
-
-(defp *cr8-file* (cr8-file)
-  "Create an instance of the file generator")
-
 (def cr8-file ()
   "Return a cr8-file function with an internal counter."
   (let ((counter 0))
@@ -92,6 +80,18 @@
                              :if-exists :supersede
                              :if-does-not-exist :create)
           (format out "~a" contents))))))
+
+(defp *cr8-file* (cr8-file)
+  "Create an instance of the file generator")
+
+(defm with-out-files (dir &body file-specs)
+  "Generate multiple files inside DIR using *cr8-file*."
+  `(uiop:with-current-directory (,dir)
+     ,@(loop for (fname contents) in file-specs
+             collect `(funcall *cr8-file* ,(if (listp fname)
+                                               `(path ,@fname)
+                                               `(path ,fname))
+                       ,contents))))
 
 (def path (name &optional type)
   "Return a pathname from NAME and TYPE."
