@@ -4,6 +4,8 @@
 
 Everything runs on **SBCL** (or any Lisp that already ships **ASDF 3** and **UIOP**) plus **GNU Make** if you want the convenience targets. There is no Quicklisp dependency; loading is plain `(require "asdf")` and `asdf:load-system`.
 
+The Lisp sources are written for **ASDF/UIOP** and behave the same on **Linux**, **macOS**, and anywhere else SBCL runs. The **Makefile** is written for a POSIX shell (typical on Linux and macOS). On **Windows**, use **WSL2**, **Git Bash + GNU Make**, or run SBCL by hand from a REPL instead of `make`.
+
 ---
 
 ## Prerequisites
@@ -13,17 +15,19 @@ Everything runs on **SBCL** (or any Lisp that already ships **ASDF 3** and **UIO
 - **Quicklisp / Ultralisp** — not used. No extra Lisp libraries to install for **cl-skel** or generated projects.
 - **Git** — optional; templates read `git config user.name` / `user.email` when present, otherwise placeholders are fine.
 
-If `sbcl` is not on your `PATH`, pass it to Make:
+If `sbcl` is not on your `PATH`, pass the full path to Make, for example:
 
-`make setup LISP=/opt/homebrew/bin/sbcl`
+- Linux (distro package): `make setup LISP=/usr/bin/sbcl`
+- macOS (Homebrew): `make setup LISP=/opt/homebrew/bin/sbcl`
+- Any OS: `make setup LISP=/path/where/you/installed/sbcl`
 
-With `LISP` unset, the Makefile also tries `/opt/homebrew/bin/sbcl` and `/usr/local/bin/sbcl` (common on macOS).
+With `LISP` unset, the Makefile uses `command -v sbcl`, then checks `/usr/bin/sbcl`, `/usr/local/bin/sbcl`, and `/opt/homebrew/bin/sbcl` in that order.
 
 ---
 
 ## What gets generated
 
-By default, `cr8` writes under `~/common-lisp/<name>/`. A project named `my-project` looks like this:
+By default, `cr8` writes under `~/common-lisp/<name>/` (the usual `user-homedir-pathname` convention). On Windows, or if you prefer another root, pass `:target` to `cr8` with a pathname your Lisp accepts (for example `#p"C:/Users/you/projects/"`). A project named `my-project` looks like this:
 
 ```
 my-project/

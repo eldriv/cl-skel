@@ -22,7 +22,7 @@
 
 (defun test-construct-path-tree ()
   "Generated projects must be project/<root files> + src/ + t/ (regression for merge-pathnames layout)."
-  (let* ((root (uiop:ensure-directory-pathname #p"/tmp/"))
+  (let* ((root (uiop:ensure-directory-pathname (uiop:temporary-directory)))
          (proj (construct-path "cl-skel-layout-x" root))
          (src (construct-path +src-directory+ proj))
          (tdir (construct-path +test-directory+ proj))

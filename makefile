@@ -7,11 +7,12 @@ MAKEFLAGS += --no-builtin-rules
 .SHELLFLAGS := -c
 .DELETE_ON_ERROR:
 
-# SBCL: override with `make LISP=/path/to/sbcl`. Otherwise PATH, then Homebrew /usr/local.
+# SBCL: override with `make LISP=/path/to/sbcl`. Otherwise PATH, then common install locations.
 LISP ?= $(shell sh -c 'c="$$(command -v sbcl 2>/dev/null)"; \
 	if [ -n "$$c" ] && [ -x "$$c" ]; then echo "$$c"; \
-	elif [ -x /opt/homebrew/bin/sbcl ]; then echo /opt/homebrew/bin/sbcl; \
+	elif [ -x /usr/bin/sbcl ]; then echo /usr/bin/sbcl; \
 	elif [ -x /usr/local/bin/sbcl ]; then echo /usr/local/bin/sbcl; \
+	elif [ -x /opt/homebrew/bin/sbcl ]; then echo /opt/homebrew/bin/sbcl; \
 	else echo sbcl; fi')
 
 PROJECT_BUILDER := cl-skel
@@ -43,8 +44,8 @@ assert-lisp:
 	  */*) test -x "$(LISP)" || { echo "❌ SBCL not executable: $(LISP)"; exit 1; } ;; \
 	  *) command -v "$(LISP)" >/dev/null 2>&1 || { \
 		echo "❌ SBCL not found (tried: $(LISP))."; \
-		echo "   Install: brew install sbcl"; \
-		echo "   Or point Make at your binary: make setup LISP=/path/to/sbcl"; \
+		echo "   Install SBCL for your OS (e.g. apt install sbcl, dnf install sbcl, pacman -S sbcl, brew install sbcl)"; \
+		echo "   or download from https://www.sbcl.org/platform-table.html — then: make setup LISP=/path/to/sbcl"; \
 		exit 1; }; \
 	esac
 
