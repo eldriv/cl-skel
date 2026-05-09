@@ -1,44 +1,25 @@
 (uiop:define-package #:cl-skel/src/templates/root
-  (:use #:cl
-        #:marie
-        #:cl-skel/src/utilities))
+  (:use #:cl #:cl-skel/src/utilities)
+  (:export #:create-readme-file
+           #:create-makefile
+           #:create-src-version-file
+           #:create-t-version-file))
 
 (in-package #:cl-skel/src/templates/root)
 
-(def create-src-version-file ()
+(defun create-src-version-file ()
   "Generate `/version.sexp'."
-  (fmt "\"1.0.0\""))
+  (format nil "\"1.0.0\""))
 
-(def create-t-version-file ()
-  "Generate `/version.sexp'."
-  (fmt "\"1.0.0\""))
+(defun create-t-version-file ()
+  "Generate `/version-tests.sexp'."
+  (format nil "\"1.0.0\""))
 
 (deftemplate* readme-file
-    "Generate `/Readme.md'."
+    "Generate `/README.org'."
   "#+title: ${project}
 #+author: ${author}
 #+email: ${email}
-")
-
-(deftemplate* gitignore-file
-    "Generate `/.gitignore'."
-  "*.fasl
-*.64yfasl
-*.lisp-temp
-*.dfsl
-*.pfsl
-*.d64fsl
-*.p64fsl
-*.lx64fsl
-*.lx32fsl
-*.dx64fsl
-*.dx32fsl
-*.fx64fsl
-*.fx32fsl
-*.sx64fsl
-*.sx32fsl
-*.wx64fsl
-*.wx32fsl
 ")
 
 (deftemplate* makefile
@@ -59,7 +40,12 @@ LISP := sbcl
 all: $(NAME)
 
 $(NAME):
-	@$(LISP) --eval '(ql:quickload :${project})' --eval '(asdf:make :${project})' --eval '(uiop:quit)'
+	@$(LISP) --non-interactive \\
+		--eval '(require \"asdf\")' \\
+		--eval '(push (uiop:ensure-directory-pathname (uiop:getcwd)) asdf:*central-registry*)' \\
+		--eval '(asdf:load-system :${project})' \\
+		--eval '(asdf:make :${project})' \\
+		--eval '(uiop:quit 0)'
 
 clean:
 	@rm -f $(NAME)

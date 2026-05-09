@@ -4,14 +4,12 @@
 
 (defsystem #:cl-skel
   :version (:read-file-form #P"version.sexp")
-  :description "A Modern Common Lisp Project Generator with Marie's Support utilities."
+  :description "A Common Lisp project generator (portable ASDF/UIOP only)."
   :author "Eldriv"
   :maintainer "Eldriv"
   :license "MIT"
   :class :package-inferred-system
   :depends-on (#:uiop
-               #:marie
-               #:fiveam
                #:cl-skel/src/templates/specials
                #:cl-skel/src/utilities
                #:cl-skel/src/templates/root

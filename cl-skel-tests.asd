@@ -5,8 +5,7 @@
   :description "ASDF test system of CL-SKEL"
   :license "MIT"
   :class :package-inferred-system
-  :depends-on (#:fiveam
-               #:marie
+  :depends-on (#:cl-skel/src/utilities
                #:cl-skel/t/utilities
                #:cl-skel/t/run
                #:cl-skel/t/driver)

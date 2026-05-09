@@ -1,7 +1,7 @@
 (uiop:define-package #:cl-skel/src/templates/system-definitions
-  (:use #:cl
-        #:marie
-        #:cl-skel/src/utilities))
+  (:use #:cl #:cl-skel/src/utilities)
+  (:export #:create-src-asdf
+           #:create-t-asdf))
 
 (in-package #:cl-skel/src/templates/system-definitions)
 
@@ -15,8 +15,7 @@
     :maintainer \"${author} <${email}>\"
     :license \"\"
     :class :package-inferred-system
-    :depends-on (#:marie
-                 #:${project}/src/main
+    :depends-on (#:${project}/src/main
                  #:${project}/src/driver
                  #:${project}/src/user)
     :in-order-to ((test-op (test-op \"${project}-tests\"))))
@@ -32,9 +31,7 @@
     :maintainer \"${author} <${email}>\"
     :license \"\"
     :class :package-inferred-system
-    :depends-on (#:fiveam
-                 #:marie
-                 #:${project}
+    :depends-on (#:${project}
                  #:${project}/t/main-tests
                  #:${project}/t/driver-tests
                  #:${project}/t/user-tests)

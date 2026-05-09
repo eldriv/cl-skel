@@ -1,100 +1,30 @@
-# Overview
-CL Skel is a tool to quickly set up organized Common Lisp projects with a clean structure, ASDF system definitions, and built-in testing. Whether you're starting a new project or prototyping, this tool streamlines the process so you can focus on coding.
+# cl-skel
 
-## What It Does
-- **Sets Up Project Structure**: Creates `src/` and `t/` directories for your code and tests.
-- **ASDF Support**: Generates system definitions for your project and tests.
-- **Git Integration**: Automatically pulls your Git username and email for project metadata.
-- **Customizable Templates**: Uses a flexible system to tailor generated files.
-- **Package Management**: Organizes dependencies with package-inferred systems.
-- **Testing Ready**: Includes the [FiveAM](https://github.com/lispci/fiveam) testing framework with test runners.
-- **Build Tools**: Comes with a `Makefile` for easy compilation and cleanup.
+**cl-skel** scaffolds a small Common Lisp application: ASDF systems, `src/` and `t/` trees, a sample `hello` entrypoint, and a minimal test runner. It is meant for quick starts and experiments, not as a full application framework.
+
+Everything runs on **SBCL** (or any Lisp that already ships **ASDF 3** and **UIOP**) plus **GNU Make** if you want the convenience targets. There is no Quicklisp dependency; loading is plain `(require "asdf")` and `asdf:load-system`.
+
+---
 
 ## Prerequisites
-You'll need these libraries:
-- [UIOP](https://quickref.common-lisp.net/uiop.html) 
-- [Marie](https://github.com/krei-systems/marie/tree/main) (Utility library)
-- [FiveAM](https://github.com/lispci/fiveam) (for Unit testing)
 
-## Installation
-1. Clone or download this repository:
-   ```bash
-   $ git clone https://github.com/eldriv/cl-skel.git
-   ```
-2. Load it in your Lisp environment:
-   ```lisp
-   CL-USER> (ql:quickload :cl-skel)
-   ```
+- **SBCL** (or another Lisp that ships **ASDF 3** and **UIOP**) — required. Normal SBCL installs qualify. This is not “ANSI CL only”: ASDF/UIOP come with the implementation, not from Quicklisp.
+- **GNU Make** — optional; only if you use Makefile targets (`make`, `make setup`, `make project-name`, …). You can load and run **cl-skel** from a REPL without Make.
+- **Quicklisp / Ultralisp** — not used. No extra Lisp libraries to install for **cl-skel** or generated projects.
+- **Git** — optional; templates read `git config user.name` / `user.email` when present, otherwise placeholders are fine.
 
-## Get started
-### From the Lisp REPL
-Create a project in the default location (`~/common-lisp/`):
-```lisp
-CL-USER> (ql:quickload :cl-skel)
-CL-USER> (cl-skel/src/main:cr8 "my-project")
-#P"/hostname/hostname/common-lisp/my-project"
-```
-Specify a custom directory:
-```lisp
-CL-USER> (cl-skel/src/main:cr8 "my-project" :target "/path/to/your/directory")
-```
+If `sbcl` is not on your `PATH`, pass it to Make:
 
-### From the Terminal
-Launch SBCL and run:
-```bash
-$ sbcl
-* (ql:quickload :cl-skel)
-* (cl-skel/src/main:cr8 "my-project")
-```
-Or with a custom path:
-```bash
-sbcl
-* (cl-skel/src/main:cr8 "my-project" :target "/path/to/your/directory")
-```
+`make setup LISP=/opt/homebrew/bin/sbcl`
 
-### Using Makefile
-```make
-$ make 
-[Common Lisp Project Generator]
+With `LISP` unset, the Makefile also tries `/opt/homebrew/bin/sbcl` and `/usr/local/bin/sbcl` (common on macOS).
 
-📝 What is the name of the project?: my-project
+---
 
-📂 Creating project: my-project
-📁 Target directory: /hostname/eldriv/common-lisp/my-project
+## What gets generated
 
-⚡ Generating project structure...
-This is SBCL 2.4.10, an implementation of ANSI Common Lisp.
-More information about SBCL is available at <http://www.sbcl.org/>.
+By default, `cr8` writes under `~/common-lisp/<name>/`. A project named `my-project` looks like this:
 
-SBCL is free software, provided as is, with absolutely no warranty.
-It is mostly in the public domain; some portions are provided under
-BSD-style licenses.  See the CREDITS and COPYING files in the
-distribution for more information.
-To load "cl-skel":
-  Load 1 ASDF system:
-    cl-skel
-; Loading "cl-skel"
-.
-[1/16] — /hostname/common-lisp/my-project/README.org
-[2/16] — /hostname/common-lisp/my-project/makefile
-[3/16] — /hostname/common-lisp/my-project/.gitignore
-[4/16] — /hostname/common-lisp/my-project/my-project.asd
-[5/16] — /hostname/common-lisp/my-project/my-project-tests.asd
-[6/16] — /hostname/common-lisp/my-project/version.sexp
-[7/16] — /hostname/common-lisp/my-project/version-tests.sexp
-[8/16] — /hostname/common-lisp/my-project/src/main.lisp
-[9/16] — /hostname/common-lisp/my-project/src/driver.lisp
-[10/16] — /hostname/common-lisp/my-project/src/user.lisp
-[11/16] — /hostname/common-lisp/my-project/src/build.lisp
-[12/16] — /hostname/common-lisp/my-project/src/utilities.lisp
-[13/16] — /hostname/common-lisp/my-project/src/specials.lisp
-[14/16] — /hostname/common-lisp/my-project/t/main-tests.lisp
-[15/16] — /hostname/common-lisp/my-project/t/driver-tests.lisp
-[16/16] — /hostname/common-lisp/my-project/t/user-tests.lisp
-✅ Project 'my-project' created successfully!
-📂 Location: /hostname/common-lisp/my-project
-```
-The generated project will look like this:
 ```
 my-project/
 ├── makefile
@@ -102,94 +32,118 @@ my-project/
 ├── my-project-tests.asd
 ├── README.org
 ├── src
-│   ├── build.lisp
-│   ├── driver.lisp
-│   ├── main.lisp
-│   ├── specials.lisp
-│   ├── user.lisp
-│   └── utilities.lisp
+│   ├── build.lisp
+│   ├── driver.lisp
+│   ├── main.lisp
+│   ├── specials.lisp
+│   ├── user.lisp
+│   └── utilities.lisp
 ├── t
-│   ├── driver-tests.lisp
-│   ├── main-tests.lisp
-│   └── user-tests.lisp
+│   ├── driver-tests.lisp
+│   ├── main-tests.lisp
+│   └── user-tests.lisp
 ├── version.sexp
 └── version-tests.sexp
-
-```
-If you want to delete the newest generated folder project under `~/common-lisp`
-
-``` bash
-$ make clean
-🧹 [Project Cleanup]
-📝 Enter the project name to delete: my-project
-📁 Found project: /hostname/common-lisp/my-project
-⚠️  Are you sure you want to delete 'my-project'? (y/n): y
-✅ Project 'my-project' deleted successfully.
-
-$ make lst
-📁 List of projects in ~/common-lisp directory:
-
-adz
-asdf
-cl-skel
-..
-..
-..
 ```
 
-## Working with the generated project
-1. Load your project:
-   ```lisp
-   (ql:quickload :my-project)
-   (in-package :my-project/src/main)
-   (hello)  ;; Try the sample function
-   ```
+Systems use **package-inferred-system** so each file’s package matches its path (for example `my-project/src/main`). Generated tests use `assert` and a tiny `run-tests` hook wired to ASDF’s `test-op`.
 
-2. Run tests using FiveAM:
-   ```lisp
-   (ql:quickload :my-project)
-   (asdf:test-system :my-project)
-   ```
+---
 
-3. Build or clean with the `Makefile`:
-   ```bash
-   make        # Compile the project
-   make clean  # Remove build files
-   ```
-4. Marie Dependency:  The idea from Marie is to reduce boilerplate and simplify development. It enhances package hygiene by automatically exporting functions, variables, and other definitions unless explicitly told not to.
+## Clone and load this repository
+
+```bash
+git clone https://github.com/eldriv/cl-skel.git
+cd cl-skel
+```
+
+Register the checkout on ASDF’s central registry, then load:
+
 ```lisp
-(uiop:define-package #:ai/src/specials
-  (:use #:cl
-           #:marie))
-
-(defv *default-name* "world")
+(require "asdf")
+(push #P"/absolute/path/to/cl-skel/" asdf:*central-registry*)
+(asdf:load-system :cl-skel)
 ```
+
+From the repo root, `make setup` runs the same idea in one shot (SBCL non-interactive, push cwd, load `:cl-skel`).
+
+To run **cl-skel’s own tests**:
+
+```bash
+sbcl --non-interactive \
+  --eval '(require "asdf")' \
+  --eval '(push (uiop:ensure-directory-pathname (uiop:getcwd)) asdf:*central-registry*)' \
+  --eval '(asdf:test-system :cl-skel)' \
+  --eval '(uiop:quit 0)'
+```
+
+Use your real `sbcl` path if it is not on `PATH`.
+
+---
+
+## Creating a project
+
+**From the shell** (stay in the cl-skel repo so ASDF sees `cl-skel.asd`):
+
+```bash
+make                              # prompts for a name
+make project-name PROJECT=acme    # non-interactive
+```
+
+**From a Lisp REPL** (after loading `:cl-skel` as above):
+
 ```lisp
-(uiop:define-package #:ai/src/main
-  (:use #:cl
-           #:marie
-           #:ai/src/specials))
+(cl-skel/src/main:cr8 "acme")
+;; => #P".../common-lisp/acme/"   (default parent ~/common-lisp/)
 
-(def- greet (name)
-  (format nil "Hello, ~A!" name))
-
-(def- say-hello ()
-  (greet *default-name*))
+(cl-skel/src/main:cr8 "acme" :target #P"/tmp/projects/")
+;; parent directory of your choice
 ```
-It has two types of defining forms: 
-- The Exporting forms like def, defv, defm, etc., will automatically export the symbol from the package 
-- The Non-exporting forms like def-, defv-, etc., define internal/private symbols that remain unexported.
 
-## Customizing Your Projects
-To tweak the generated files, you can:
-- Add custom replacement functions in `specials.lisp` (modify [*table*](https://github.com/eldriv/cl-skel/blob/main/src/templates/specials.lisp)).
-- Create new file generators in the relevant modules.
-- Update the `create-files` function in [main.lisp](https://github.com/eldriv/cl-skel/blob/main/src/main.lisp) to include additional files.
+The first argument is the project name; it becomes the directory name and the primary ASDF system designator (e.g. `:acme`).
 
-## Need Help?
-- Check the [FiveAM documentation](https://github.com/lispci/fiveam) for testing tips.
-- See [Marie](https://github.com/krei-systems/marie)'s [README](https://github.com/krei-systems/marie/blob/main/README.org) for exporting symbols. 
-- Explore [ASDF](https://common-lisp.net/project/asdf/) for system configuration.
-- Reach out on the project's [GitHub Issues](https://github.com/eldriv/cl-skel/issues) for support or issues.
+Other useful targets: `make clean` (remove a project under the configured parent, with prompts), `make lst` (list that parent).
 
-> NOTE: This is macro semi codebase library, some approaches are written in macros. 
+---
+
+## Working inside a generated project
+
+Point ASDF at the **directory that contains** `<name>.asd`, then load and test. The system keyword always matches the project name (`:acme` for folder `acme`).
+
+```lisp
+(require "asdf")
+(push #P"~/common-lisp/acme/" asdf:*central-registry*)
+(asdf:load-system :acme)
+(in-package :acme/src/main)
+(hello)
+
+(asdf:test-system :acme)
+```
+
+The generated **makefile** loads ASDF from the project root, pushes the cwd onto the registry, and runs `asdf:make` on that system—useful when you do not want a REPL.
+
+**One-shot smoke test from the shell** (adjust path and `:system` to match what you actually created):
+
+```bash
+sbcl --non-interactive \
+  --eval '(require "asdf")' \
+  --eval '(push (uiop:ensure-directory-pathname #P"'"$HOME"'/common-lisp/acme/") asdf:*central-registry*)' \
+  --eval '(asdf:load-system :acme)' \
+  --eval '(asdf:test-system :acme)' \
+  --eval '(uiop:quit 0)'
+```
+
+If ASDF says a component is missing, almost always the registry path or the keyword does not match the project you generated (for example loading `:smoke-test-proj` while only `acme/` exists).
+
+---
+
+## Changing what gets emitted
+
+Templates and wiring live under `src/templates/` and `src/main.lisp` (`create-files`). Substitution markers and git-backed defaults are in `src/templates/specials.lisp` (`*table*`, git user placeholders). Adjust those, or add new `deftemplate` definitions and list the new outputs in `create-files`.
+
+---
+
+## Further reading
+
+- [ASDF](https://common-lisp.net/project/asdf/) — system definitions and `test-op`.
+- [Issues](https://github.com/eldriv/cl-skel/issues) — bugs and questions for this repo.

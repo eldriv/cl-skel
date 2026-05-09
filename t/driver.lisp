@@ -3,8 +3,7 @@
 
 (uiop:define-package #:cl-skel/t/driver
   (:nicknames #:cl-skel-t)
-  (:use #:uiop/common-lisp
-        #:marie)
+  (:use #:uiop/common-lisp)
   (:use-reexport #:cl-skel/t/run))
 
 (provide "cl-skel/t")

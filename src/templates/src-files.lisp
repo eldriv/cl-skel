@@ -1,20 +1,20 @@
 (uiop:define-package #:cl-skel/src/templates/src-files
-  (:use #:cl
-        #:marie
-        #:cl-skel/src/utilities))
+  (:use #:cl #:cl-skel/src/utilities)
+  (:export #:create-src-specials
+           #:create-src-utilities
+           #:create-src-main-file
+           #:create-src-driver
+           #:create-src-user
+           #:create-src-build))
 
 (in-package #:cl-skel/src/templates/src-files)
-
-
-;; Source Files Generation
 
 (deftemplate src-specials
     "Generate `/src/specials.lisp'."
   ";;;; specials.lisp --- Special variables
 
 (uiop:define-package #:${project}/src/specials
-  (:use #:cl
-        #:marie))
+  (:use #:cl))
 
 (in-package #:${project}/src/specials)
 ")
@@ -24,8 +24,7 @@
   ";;;; utilities.lisp --- Common utilities
 
 (uiop:define-package #:${project}/src/utilities
-  (:use #:cl
-        #:marie))
+  (:use #:cl))
 
 (in-package #:${project}/src/utilities)
 ")
@@ -35,12 +34,12 @@
   ";;;; main.lisp --- Entrypoints functions
 
 (uiop:define-package #:${project}/src/main
-  (:use #:cl
-        #:marie))
+  (:use #:cl)
+  (:export #:hello))
 
 (in-package #:${project}/src/main)
 
-(def main^hello ()
+(defun hello ()
   \"Display a greeting.\"
   (format t \"Hello, world!~%\"))
 ")
@@ -64,9 +63,7 @@
 
 (uiop:define-package #:${project}/src/user
   (:nicknames #:${project}-user)
-  (:use #:cl
-        #:marie
-        #:${project}/src/driver))
+  (:use #:cl #:${project}/src/driver))
 
 (in-package #:${project}-user)
 ")
@@ -74,15 +71,18 @@
 (deftemplate src-build
     "Generate `/src/build.lisp'."
   "(require 'asdf)
+
 (defun cwd-name ()
   (multiple-value-bind (type list &rest rest)
       (uiop:split-unix-namestring-directory-components
        (namestring (uiop:getcwd)))
+    (declare (ignore type rest))
     (car (last list))))
-(defun cwd-keyword () (intern (cwd-name) (find-package :keyword)))
-(defun home (path) (merge-pathnames path (user-homedir-pathname)))
-#-quicklisp (load (home \"quicklisp/setup.lisp\"))
+
+(defun cwd-keyword ()
+  (intern (cwd-name) (find-package :keyword)))
+
 (push (uiop:getcwd) asdf:*central-registry*)
-(ql:quickload (cwd-keyword))
+(asdf:load-system (cwd-keyword))
 (asdf:make (cwd-keyword))
 ")
